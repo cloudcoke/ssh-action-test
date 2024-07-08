@@ -43,7 +43,14 @@ jobs:
                   port: 22
                   envs: IMAGE_NAME,CONTAINER_PORT,CONTAINER_NAME,ENV_FILE,AWSLOGS_REGION,AWSLOGS_GROUP
                   script_stop: true
-                  script: ./deploy.sh -n $CONTAINER_NAME -i $IMAGE_NAME --env-file $ENV_FILE -p $CONTAINER_PORT \
-                      --log-driver awslogs --log-opt awslogs-region=$AWSLOGS_REGION --log-opt awslogs-group=$AWSLOGS_GROUP --log-opt awslogs-create-group=true
+                  script: |
+                      echo $CONTAINER_NAME
+                      echo $IMAGE_NAME
+                      echo $ENV_FILE
+                      echo $CONTAINER_PORT
+                      echo $AWSLOGS_REGION
+                      echo $AWSLOGS_GROUP
+                      ./deploy.sh -n $CONTAINER_NAME -i $IMAGE_NAME --env-file $ENV_FILE -p $CONTAINER_PORT \
+                        --log-driver awslogs --log-opt awslogs-region=$AWSLOGS_REGION --log-opt awslogs-group=$AWSLOGS_GROUP --log-opt awslogs-create-group=true
                   #   script: echo "-n $CONTAINER_NAME -i $IMAGE_NAME --env-file $ENV_FILE -p $CONTAINER_PORT \
                   #       --log-driver awslogs --log-opt awslogs-region=$AWSLOGS_REGION --log-opt awslogs-group=$AWSLOGS_GROUP --log-opt awslogs-create-group=true" > test.txt
